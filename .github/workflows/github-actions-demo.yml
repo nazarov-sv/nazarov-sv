@@ -1,13 +1,26 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
+env:
+  # Setting an environment variable with the value of a configuration variable
+  env_var: ${{ vars.ENV_CONTEXT_VAR }}
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "TEST VARIABLE  ${{vars.JOB_NAME }}"
-      - run: echo "TEST VARIABLE2  ${{vars.BASE_API }} | ${{ vars.ENV_CONTEXT_VAR }} | $BASE_API | ${{ env.BASE_API }}"
+      - name: Use variables
+        run: |
+          echo "repository variable : $BASE_API"
+          echo "variable from shell environment : $env_var"
+        env:
+          BASE_API: ${{ vars.BASE_API }}
+        
+      - run: echo "TEST VARIABLE2  ${{vars.BASE_API }} | ${{ vars.ENV_CONTEXT_VAR }} | $BASE_API | ${{ env.BASE_API }} ${{ env_var.ENV_CONTEXT_VAR}}"
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
