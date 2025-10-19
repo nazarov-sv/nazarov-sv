@@ -21,7 +21,7 @@ jobs:
         env:
           BASE_API: ${{ vars.BASE_API }}
 
-      - run: echo "TEST VARIABLE2  ${{vars.BASE_API }} | ${{ vars.ENV_CONTEXT_VAR }} | $BASE_API | ${{ env.BASE_API }} ${{ env_var.ENV_CONTEXT_VAR}}"
+      - run: echo "TEST VARIABLE2  ${{vars.BASE_API }} | ${{ vars.ENV_CONTEXT_VAR }} | $BASE_API | ${{ env.BASE_API }}"
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
